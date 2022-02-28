@@ -46,21 +46,27 @@ const displayDetails = (phone) => {
     const detailsContainer = document.getElementById('phone-detail');
     const div = document.createElement('div');
     div.innerHTML = `
-        <div class="card mb-3 mx-auto" style="max-width: 540px;">
+        <div class="card mb-3 mx-auto w-100">
             <div class="row g-0">
                 <div class="col-md-4">
-                    <img src="${phone.image}" class="img-fluid rounded-start" alt="...">
+                    <div class="d-flex justify-content-center align-items-center">
+                        <img src="${phone.image}" class="w-75 pt-2" alt="...">
+                    </div>
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
-                        <h5 class="card-title">${phone.name}</h5>
+                        <h4 class="card-title">${phone.name}</h4>
                         <div class="card-header">
                             Featured
                         </div>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item">An item</li>
-                            <li class="list-group-item">A second item</li>
-                            <li class="list-group-item">A third item</li>
+                            <li class="list-group-item"><strong>Brand</strong> : ${phone.brand}</li>
+                            <li class="list-group-item"><strong>Storage</strong>: ${phone.mainFeatures.storage}</li>
+                            <li class="list-group-item"><strong>Display Size</strong>: ${phone.mainFeatures.displaySize}</li>
+                            <li class="list-group-item"><strong>WLAN</strong>: ${phone.others.WLAN}</li>
+                            <li class="list-group-item"><strong>Bluetooth</strong>: ${phone.others.Bluetooth}</li>
+                            <li class="list-group-item"><strong>GPS</strong>: ${phone.others.GPS}</li>
+                            <li class="list-group-item"><strong>USB</strong>: ${phone.others.USB}</li>
                         </ul>
                     </div>
                 </div>
