@@ -33,3 +33,40 @@ const displayPhone = (phones) => {
     })
 }
 
+const showDetails = (productId) => {
+    const url = `https://openapi.programming-hero.com/api/phone/${productId}`;
+    fetch(url)
+        .then(res => res.json())
+        .then(data => displayDetails(data.data))
+}
+
+
+const displayDetails = (phone) => {
+    console.log(phone);
+    const detailsContainer = document.getElementById('phone-detail');
+    const div = document.createElement('div');
+    div.innerHTML = `
+        <div class="card mb-3 mx-auto" style="max-width: 540px;">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="${phone.image}" class="img-fluid rounded-start" alt="...">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">${phone.name}</h5>
+                        <div class="card-header">
+                            Featured
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">An item</li>
+                            <li class="list-group-item">A second item</li>
+                            <li class="list-group-item">A third item</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+
+    detailsContainer.appendChild(div);
+}
