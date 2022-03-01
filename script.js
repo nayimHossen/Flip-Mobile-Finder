@@ -68,6 +68,8 @@ const loadShowDetails = (productId) => {
     fetch(url)
         .then(res => res.json())
         .then(data => displayDetails(data.data))
+
+    //window scrolling
     window.scrollTo({
         top: 110,
         behavior: 'smooth'
