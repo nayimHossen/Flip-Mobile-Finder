@@ -6,7 +6,7 @@ const searchPhones = () => {
     const searchInput = document.getElementById('search-input');
     const searchText = searchInput.value;
     if (searchText == '') {
-        showErrorMessage('Empty filed, Please Search a food');
+        showErrorMessage('block', 'Empty filed, Please Search a food');
         toggleSpinner('none');
     }
     else {
@@ -24,7 +24,7 @@ const displayPhone = (phones) => {
     const phonesContainer = document.getElementById('foods-container');
     phonesContainer.textContent = "";
     if (phones.length == '') {
-        showErrorMessage("Product did't found, try again");
+        showErrorMessage("block", "Product did't found, try again");
         toggleSpinner('none');
     }
     else {
@@ -49,6 +49,7 @@ const displayPhone = (phones) => {
             phonesContainer.appendChild(div);
         });
         toggleSpinner('none')
+        showErrorMessage('none', "");
     }
 }
 
@@ -62,14 +63,6 @@ const showDetails = (productId) => {
 
 const displayDetails = (phone) => {
 
-    let release;
-    if (phone.releaseDate == "") {
-        release = 'date not found';
-    }
-    else {
-        release = `${phone.releaseDate}`
-    }
-
     const phoneDetailsContainer = document.getElementById('phone-detail');
     phoneDetailsContainer.textContent = "";
     const div = document.createElement('div');
@@ -77,19 +70,18 @@ const displayDetails = (phone) => {
         <div class="card mb-3 mx-auto w-100">
             <div class="row g-0">
                 <div class="col-md-4">
-                    <div class="d-flex justify-content-center align-items-center">
-                        <img src="${phone.image}" class="w-75 pt-2" alt="...">
-                    </div>
                     <div class="d-flex justify-content-center align-items-center my-3">
                         <div>
                             <h2 class="card-title fw-bold">${phone.name}</h2>
-                            <small><strong>Released</strong> : ${release}</small>
+                            <small><strong>Released</strong> : ${phone.releaseDate == "" ? 'date not found' : phone.releaseDate}</small>
                         </div>
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center">
+                        <img src="${phone.image}" class="w-75 pt-2" alt="...">
                     </div>
                 </div>
                 <div class="col-md-5">
                     <div class="card-body">
-                        
                         <div class="card-header">
                             Featured
                         </div>
@@ -98,10 +90,10 @@ const displayDetails = (phone) => {
                             <li class="list-group-item"><strong>Storage</strong>: ${phone.mainFeatures.storage}</li>
                             <li class="list-group-item"><strong>Memory</strong>: ${phone.mainFeatures.memory}</li>
                             <li class="list-group-item"><strong>Display Size</strong>: ${phone.mainFeatures.displaySize}</li>
-                            <li class="list-group-item"><strong>WLAN</strong>: ${phone.others.WLAN}</li>
-                            <li class="list-group-item"><strong>Bluetooth</strong>: ${phone.others.Bluetooth}</li>
-                            <li class="list-group-item"><strong>GPS</strong>: ${phone.others.GPS}</li>
-                            <li class="list-group-item"><strong>USB</strong>: ${phone.others.USB}</li>
+                            <li class="list-group-item"><strong>WLAN</strong>: ${phone.others?.WLAN || "didn't found"}</li>
+                            <li class="list-group-item"><strong>Bluetooth</strong>: ${phone.others?.Bluetooth || "didn't found"}</li>
+                            <li class="list-group-item"><strong>GPS</strong>: ${phone.others?.GPS || "didn't found"}</li>
+                            <li class="list-group-item"><strong>USB</strong>: ${phone.others?.USB || "didn't found"}</li>
                         </ul>
                     </div>
                 </div>
@@ -127,7 +119,7 @@ const displayDetails = (phone) => {
     phoneDetailsContainer.appendChild(div);
 }
 
-const showErrorMessage = (message) => {
-    document.getElementById('message').style.display = 'block';
+const showErrorMessage = (displayStyle, message) => {
+    document.getElementById('message').style.display = displayStyle;
     document.getElementById('Error-message').innerText = message;
 }
