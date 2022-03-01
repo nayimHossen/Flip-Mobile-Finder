@@ -1,10 +1,10 @@
-const toggleSpinner = (style) => {
-    document.getElementById('spinner').style.display = style;
-}
 
+// search phones from api function
 const searchPhones = () => {
     const searchInput = document.getElementById('search-input');
     const searchText = searchInput.value;
+
+    //empty input filed error handle
     if (searchText == '') {
         showErrorMessage('block', 'Empty filed, Please Search a food');
         toggleSpinner('none');
@@ -20,18 +20,23 @@ const searchPhones = () => {
     }
 };
 
+//display get data from api function
 const displayPhone = (phones) => {
-    const phonesContainer = document.getElementById('foods-container');
+    const phonesContainer = document.getElementById('phones-container');
     phonesContainer.textContent = "";
+
+    //if did't have product that you search show this message
     if (phones.length == '') {
         showErrorMessage("block", "Product did't found, try again");
         toggleSpinner('none');
     }
     else {
+        //to get each phone using forEach method
         phones.forEach(phone => {
             const div = document.createElement('div');
             div.classList.add('col');
 
+            //each phone card that display img, name, and details button
             div.innerHTML = `
             <div id="phone" class="card h-100 shadow-sm">
                 <img src="${phone.image}" class="w-50 mx-auto pt-3" alt="...">
@@ -41,7 +46,7 @@ const displayPhone = (phones) => {
                         <p class="card-text">${phone.brand}</p>
                     </div>
                     <div class="col-5">
-                        <button onclick="showDetails('${phone.slug}')" class="btn searchButton px-4 py-2">Details</button>
+                        <button onclick="loadShowDetails('${phone.slug}')" class="btn searchButton px-4 py-2">Details</button>
                     </div>
                 </div>
             </div>
@@ -51,24 +56,27 @@ const displayPhone = (phones) => {
         toggleSpinner('none')
         showErrorMessage('none', "");
     }
-}
+};
 
-const showDetails = (productId) => {
+//show detail calling api using phone name and dynamic parametar
+const loadShowDetails = (productId) => {
     const url = `https://openapi.programming-hero.com/api/phone/${productId}`;
     fetch(url)
         .then(res => res.json())
         .then(data => displayDetails(data.data))
-}
+};
 
-
+//display get details data from api in website
 const displayDetails = (phone) => {
-
     const phoneDetailsContainer = document.getElementById('phone-detail');
     phoneDetailsContainer.textContent = "";
+
+    //details information show in a bootstrap card 3 column
     const div = document.createElement('div');
     div.innerHTML = `
         <div class="card mb-3 mx-auto w-100">
             <div class="row g-0">
+
                 <div class="col-md-4">
                     <div class="d-flex justify-content-center align-items-center my-3">
                         <div>
@@ -80,6 +88,7 @@ const displayDetails = (phone) => {
                         <img src="${phone.image}" class="w-75 pt-2" alt="...">
                     </div>
                 </div>
+
                 <div class="col-md-5">
                     <div class="card-body">
                         <div class="card-header">
@@ -117,9 +126,15 @@ const displayDetails = (phone) => {
     `;
 
     phoneDetailsContainer.appendChild(div);
-}
+};
 
+//show error message function
 const showErrorMessage = (displayStyle, message) => {
     document.getElementById('message').style.display = displayStyle;
     document.getElementById('Error-message').innerText = message;
+};
+
+//spinner toggle function
+const toggleSpinner = (style) => {
+    document.getElementById('spinner').style.display = style;
 }

@@ -1,15 +1,39 @@
+/*..............................................
+        common css style
+................................................*/
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
 body{
     background-color: rgb(253, 245, 246);
 }
-
+h2{
+    color: rgb(24, 20, 20);
+}
+span{
+    color: #6ac334;
+}
+/*..............................................
+        error message css style
+................................................*/
 #message{
     display: none;
     color: rgb(252, 85, 85);
 }
 
+/*..............................................
+        spinner css style
+................................................*/
 #spinner{
     display: none;
 }
+
+/*..............................................
+        button css style
+................................................*/
 .button{
     background-color: #6ac334;
     border: none;
@@ -19,15 +43,10 @@ body{
     margin: 2px;
     padding: 5px 10px;
 }
-h2{
-    color: rgb(24, 20, 20);
-}
-span{
-    color: #6ac334;
-}
 
 .searchButton{
     background-color: #6ac334;
     color: white;
     font-weight: bold;
 }
+
