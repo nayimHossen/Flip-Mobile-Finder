@@ -16,6 +16,7 @@ const searchPhones = () => {
         const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`;
         fetch(url)
             .then(res => res.json())
+            //show first 20 phone using slice method
             .then(data => displayPhone(data.data.slice(0, 20)))
     }
 };
@@ -33,20 +34,23 @@ const displayPhone = (phones) => {
     else {
         //to get each phone using forEach method
         phones.forEach(phone => {
+            //destructuring
+            const { image, brand, phone_name, slug } = phone;
+
             const div = document.createElement('div');
             div.classList.add('col');
 
             //each phone card that display img, name, and details button
             div.innerHTML = `
             <div id="phone" class="card h-100 shadow-sm">
-                <img src="${phone.image}" class="w-50 mx-auto pt-3" alt="...">
+                <img src="${image}" class="w-50 mx-auto pt-3" alt="...">
                 <div class="card-body row align-item-center justify-content-center">
                     <div class="col-7">
-                        <h5 class="card-title">${phone.phone_name}</h5>
-                        <p class="card-text">${phone.brand}</p>
+                        <h5 class="card-title">${phone_name}</h5>
+                        <p class="card-text">${brand}</p>
                     </div>
                     <div class="col-5">
-                        <button onclick="loadShowDetails('${phone.slug}')" class="btn searchButton px-4 py-2">Details</button>
+                        <button onclick="loadShowDetails('${slug}')" class="btn searchButton px-4 py-2">Details</button>
                     </div>
                 </div>
             </div>
@@ -58,7 +62,7 @@ const displayPhone = (phones) => {
     }
 };
 
-//show detail calling api using phone name and dynamic parametar
+//show detail calling api using phone name and dynamic parameter
 const loadShowDetails = (productId) => {
     const url = `https://openapi.programming-hero.com/api/phone/${productId}`;
     fetch(url)
