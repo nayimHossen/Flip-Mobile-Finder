@@ -68,6 +68,10 @@ const loadShowDetails = (productId) => {
     fetch(url)
         .then(res => res.json())
         .then(data => displayDetails(data.data))
+    window.scrollTo({
+        top: 110,
+        behavior: 'smooth'
+    });
 };
 
 //display get details data from api in website
@@ -112,9 +116,9 @@ const displayDetails = (phone) => {
                 </div>
 
                 <div class="col-md-3 mt-3">
-                  <div class="card-header">
+                    <div class="card-header">
                             Sensor
-                        </div>
+                    </div>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">${phone.mainFeatures.sensors[0]}</li>
                             <li class="list-group-item">${phone.mainFeatures.sensors[1]}</li>
@@ -128,7 +132,6 @@ const displayDetails = (phone) => {
             </div>
         </div>
     `;
-
     phoneDetailsContainer.appendChild(div);
 };
 
