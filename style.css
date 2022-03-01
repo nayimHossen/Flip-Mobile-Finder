@@ -1,3 +1,7 @@
+body{
+    background-color: rgb(253, 245, 246);
+}
+
 #message{
     display: none;
     color: rgb(252, 85, 85);
@@ -5,4 +9,25 @@
 
 #spinner{
     display: none;
+}
+.button{
+    background-color: #6ac334;
+    border: none;
+    border-radius: 20px;
+    color: white;
+    font-weight: bold;
+    margin: 2px;
+    padding: 5px 10px;
+}
+h2{
+    color: rgb(24, 20, 20);
+}
+span{
+    color: #6ac334;
+}
+
+.searchButton{
+    background-color: #6ac334;
+    color: white;
+    font-weight: bold;
 }
