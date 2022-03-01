@@ -71,7 +71,7 @@ const displayDetails = (phone) => {
                         <img src="${phone.image}" class="w-75 pt-2" alt="...">
                     </div>
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-5">
                     <div class="card-body">
                         <h4 class="card-title">${phone.name}</h4>
                         <small><strong>Release Date</strong> : ${release}</small>
@@ -81,11 +81,27 @@ const displayDetails = (phone) => {
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item"><strong>Brand</strong> : ${phone.brand}</li>
                             <li class="list-group-item"><strong>Storage</strong>: ${phone.mainFeatures.storage}</li>
+                            <li class="list-group-item"><strong>Memory</strong>: ${phone.mainFeatures.memory}</li>
                             <li class="list-group-item"><strong>Display Size</strong>: ${phone.mainFeatures.displaySize}</li>
                             <li class="list-group-item"><strong>WLAN</strong>: ${phone.others.WLAN}</li>
                             <li class="list-group-item"><strong>Bluetooth</strong>: ${phone.others.Bluetooth}</li>
                             <li class="list-group-item"><strong>GPS</strong>: ${phone.others.GPS}</li>
                             <li class="list-group-item"><strong>USB</strong>: ${phone.others.USB}</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                  <div class="card-header" style="margin-top: 77px">
+                            Sensor
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">${phone.mainFeatures.sensors[0]}</li>
+                            <li class="list-group-item">${phone.mainFeatures.sensors[1]}</li>
+                            <li class="list-group-item">${phone.mainFeatures.sensors[2]}</li>
+                            <li class="list-group-item">${phone.mainFeatures.sensors[3]}</li>
+                            <li class="list-group-item">${phone.mainFeatures.sensors[4]}</li>
+                            <li class="list-group-item">${phone.mainFeatures.sensors[5]}</li>
                         </ul>
                     </div>
                 </div>
