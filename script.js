@@ -1,10 +1,16 @@
-const searchFood = () => {
+const toggleSpinner = (style) => {
+    document.getElementById('spinner').style.display = style;
+}
+
+const searchPhones = () => {
     const searchInput = document.getElementById('search-input');
     const searchText = searchInput.value;
     if (searchText == '') {
-        showError();
+        showErrorMessage('Empty filed, Please Search a food');
+        toggleSpinner('none');
     }
     else {
+        toggleSpinner('block')
         searchInput.value = '';
 
         const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`;
@@ -15,9 +21,11 @@ const searchFood = () => {
 };
 
 const displayPhone = (phones) => {
-    const foodsContainer = document.getElementById('foods-container');
+    const phonesContainer = document.getElementById('foods-container');
+    phonesContainer.textContent = "";
     if (phones.length == '') {
-        showError();
+        showErrorMessage("Product did't found, try again");
+        toggleSpinner('none');
     }
     else {
         phones.forEach(phone => {
@@ -25,7 +33,7 @@ const displayPhone = (phones) => {
             div.classList.add('col');
 
             div.innerHTML = `
-            <div class="card h-100">
+            <div id="phone" class="card h-100">
                 <img src="${phone.image}" class="w-50 mx-auto pt-3" alt="...">
                 <div class="card-body row align-item-center justify-content-center">
                     <div class="col-7">
@@ -38,8 +46,9 @@ const displayPhone = (phones) => {
                 </div>
             </div>
             `;
-            foodsContainer.appendChild(div);
-        })
+            phonesContainer.appendChild(div);
+        });
+        toggleSpinner('none')
     }
 }
 
@@ -55,13 +64,14 @@ const displayDetails = (phone) => {
 
     let release;
     if (phone.releaseDate == "") {
-        release = 'Not found';
+        release = 'date not found';
     }
     else {
         release = `${phone.releaseDate}`
     }
-    console.log(release);
-    const detailsContainer = document.getElementById('phone-detail');
+
+    const phoneDetailsContainer = document.getElementById('phone-detail');
+    phoneDetailsContainer.textContent = "";
     const div = document.createElement('div');
     div.innerHTML = `
         <div class="card mb-3 mx-auto w-100">
@@ -70,11 +80,16 @@ const displayDetails = (phone) => {
                     <div class="d-flex justify-content-center align-items-center">
                         <img src="${phone.image}" class="w-75 pt-2" alt="...">
                     </div>
+                    <div class="d-flex justify-content-center align-items-center my-3">
+                        <div>
+                            <h2 class="card-title fw-bold">${phone.name}</h2>
+                            <small><strong>Released</strong> : ${release}</small>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-5">
                     <div class="card-body">
-                        <h4 class="card-title">${phone.name}</h4>
-                        <small><strong>Release Date</strong> : ${release}</small>
+                        
                         <div class="card-header">
                             Featured
                         </div>
@@ -91,8 +106,8 @@ const displayDetails = (phone) => {
                     </div>
                 </div>
 
-                <div class="col-md-3">
-                  <div class="card-header" style="margin-top: 77px">
+                <div class="col-md-3 mt-3">
+                  <div class="card-header">
                             Sensor
                         </div>
                         <ul class="list-group list-group-flush">
@@ -109,9 +124,10 @@ const displayDetails = (phone) => {
         </div>
     `;
 
-    detailsContainer.appendChild(div);
+    phoneDetailsContainer.appendChild(div);
 }
 
-const showError = () => {
-    document.getElementById('empty-message').style.display = 'block';
+const showErrorMessage = (message) => {
+    document.getElementById('message').style.display = 'block';
+    document.getElementById('Error-message').innerText = message;
 }
