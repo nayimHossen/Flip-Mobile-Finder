@@ -6,7 +6,7 @@ const searchPhones = () => {
 
     //empty input filed error handle
     if (searchText == '') {
-        showErrorMessage('block', 'Empty filed, Please Search a food');
+        showErrorMessage('block', 'Empty filed, Please Search a phone');
         toggleSpinner('none');
     }
     else {
