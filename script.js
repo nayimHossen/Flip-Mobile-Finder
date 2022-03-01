@@ -52,7 +52,15 @@ const showDetails = (productId) => {
 
 
 const displayDetails = (phone) => {
-    console.log(phone);
+
+    let release;
+    if (phone.releaseDate == "") {
+        release = 'Not found';
+    }
+    else {
+        release = `${phone.releaseDate}`
+    }
+    console.log(release);
     const detailsContainer = document.getElementById('phone-detail');
     const div = document.createElement('div');
     div.innerHTML = `
@@ -66,6 +74,7 @@ const displayDetails = (phone) => {
                 <div class="col-md-8">
                     <div class="card-body">
                         <h4 class="card-title">${phone.name}</h4>
+                        <small><strong>Release Date</strong> : ${release}</small>
                         <div class="card-header">
                             Featured
                         </div>
