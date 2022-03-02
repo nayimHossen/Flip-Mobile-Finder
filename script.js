@@ -129,9 +129,9 @@ const displayDetails = (phone) => {
                             <li class="list-group-item">${sensors[0]}</li>
                             <li class="list-group-item">${sensors[1]}</li>
                             <li class="list-group-item">${sensors[2]}</li>
-                            <li class="list-group-item">${sensors[3]}</li>
-                            <li class="list-group-item">${sensors[4]}</li>
-                            <li class="list-group-item">${sensors[5]}</li>
+                            <li class="list-group-item">${sensors[3] || "didn't found"}</li>
+                            <li class="list-group-item">${sensors[4] || "didn't found"}</li>
+                            <li class="list-group-item">${sensors[5] || "didn't found"}</li>
                         </ul>
                     </div>
                 </div>
