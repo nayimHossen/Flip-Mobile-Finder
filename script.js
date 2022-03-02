@@ -16,8 +16,8 @@ const searchPhones = () => {
         const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`;
         fetch(url)
             .then(res => res.json())
-            //show first 20 phone using slice method
             .then(data => displayPhone(data.data.slice(0, 20)))
+        phoneDetailsContainer = document.getElementById('phone-detail').textContent = '';
     }
 };
 
@@ -34,7 +34,7 @@ const displayPhone = (phones) => {
     else {
         //to get each phone using forEach method
         phones.forEach(phone => {
-            //destructuring
+            //phone info destructuring
             const { image, brand, phone_name, slug } = phone;
 
             const div = document.createElement('div');
@@ -71,13 +71,17 @@ const loadShowDetails = (productId) => {
 
     //window scrolling
     window.scrollTo({
-        top: 110,
+        top: 115,
         behavior: 'smooth'
     });
 };
 
 //display get details data from api in website
 const displayDetails = (phone) => {
+    //phone details destructuring
+    const { brand, releaseDate, image, name } = phone;
+    const { storage, memory, displaySize, sensors } = phone.mainFeatures;
+
     const phoneDetailsContainer = document.getElementById('phone-detail');
     phoneDetailsContainer.textContent = "";
 
@@ -90,12 +94,12 @@ const displayDetails = (phone) => {
                 <div class="col-md-4">
                     <div class="d-flex justify-content-center align-items-center my-3">
                         <div>
-                            <h2 class="card-title fw-bold">${phone.name}</h2>
-                            <small><strong>Released</strong> : ${phone.releaseDate == "" ? 'date not found' : phone.releaseDate}</small>
+                            <h2 class="card-title fw-bold">${name}</h2>
+                            <small><strong>Released</strong> : ${releaseDate == "" ? 'date not found' : releaseDate}</small>
                         </div>
                     </div>
                     <div class="d-flex justify-content-center align-items-center">
-                        <img src="${phone.image}" class="w-75 pt-2" alt="...">
+                        <img src="${image}" class="w-75 pt-2" alt="...">
                     </div>
                 </div>
 
@@ -105,10 +109,10 @@ const displayDetails = (phone) => {
                             Featured
                         </div>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item"><strong>Brand</strong> : ${phone.brand}</li>
-                            <li class="list-group-item"><strong>Storage</strong>: ${phone.mainFeatures.storage}</li>
-                            <li class="list-group-item"><strong>Memory</strong>: ${phone.mainFeatures.memory}</li>
-                            <li class="list-group-item"><strong>Display Size</strong>: ${phone.mainFeatures.displaySize}</li>
+                            <li class="list-group-item"><strong>Brand</strong> : ${brand}</li>
+                            <li class="list-group-item"><strong>Storage</strong>: ${storage}</li>
+                            <li class="list-group-item"><strong>Memory</strong>: ${memory}</li>
+                            <li class="list-group-item"><strong>Display Size</strong>: ${displaySize}</li>
                             <li class="list-group-item"><strong>WLAN</strong>: ${phone.others?.WLAN || "didn't found"}</li>
                             <li class="list-group-item"><strong>Bluetooth</strong>: ${phone.others?.Bluetooth || "didn't found"}</li>
                             <li class="list-group-item"><strong>GPS</strong>: ${phone.others?.GPS || "didn't found"}</li>
@@ -122,12 +126,12 @@ const displayDetails = (phone) => {
                             Sensor
                     </div>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item">${phone.mainFeatures.sensors[0]}</li>
-                            <li class="list-group-item">${phone.mainFeatures.sensors[1]}</li>
-                            <li class="list-group-item">${phone.mainFeatures.sensors[2]}</li>
-                            <li class="list-group-item">${phone.mainFeatures.sensors[3]}</li>
-                            <li class="list-group-item">${phone.mainFeatures.sensors[4]}</li>
-                            <li class="list-group-item">${phone.mainFeatures.sensors[5]}</li>
+                            <li class="list-group-item">${sensors[0]}</li>
+                            <li class="list-group-item">${sensors[1]}</li>
+                            <li class="list-group-item">${sensors[2]}</li>
+                            <li class="list-group-item">${sensors[3]}</li>
+                            <li class="list-group-item">${sensors[4]}</li>
+                            <li class="list-group-item">${sensors[5]}</li>
                         </ul>
                     </div>
                 </div>
